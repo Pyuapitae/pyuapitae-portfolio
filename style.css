@@ -4,6 +4,13 @@
   font-style: normal;
 }
 
+.darumadrop-one-regular {
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 /* this is just for ref */
 :root{
     color: #302AD7;
@@ -18,22 +25,34 @@ header {
 
 .logo{
     padding-left: 3%;
+    padding-top: 0.5%;
+    width: 200px;
+    height: 70px;
+    /* background-color: rgb(216, 2, 2); */
+    object-fit: cover;
+
 }
+
+.logo img{
+    max-width: 200px;  /* Prevents the image from overflowing its container */
+    height: auto;  
+    display: flex;  
+}
+
 .navbar {
     display: flex;
     gap: clamp(12px, 3vw, 50px);
     padding-right: 4%;
-    padding-top: 2%;
+    /* padding-top: 2%; */
     margin-left: auto;
     font-family: "Inter", sans-serif;
-    
+    max-width: fit-content;
 }
 
 
 .navbar a {
     position: relative;
     display: inline-block;
-
     text-decoration: none;
     color: inherit;
     font-weight: 500;
@@ -92,7 +111,7 @@ header {
     background: #302AD7;
     color: #F8F5F2;
     border: 1px solid rgba(0,0,0,.08);
-    border-radius: 0px;
+    border-radius: 10px;
 
     box-shadow: 0 8px 24px rgba(0,0,0,.1);
 
@@ -112,9 +131,7 @@ header {
 
 .dropdown a {
     display: block;
-
     padding: 10px 18px;
-
     text-decoration: none;
     color: inherit;
 
@@ -122,6 +139,118 @@ header {
     font-weight: 400;
 
     white-space: nowrap;
-
     transition: background-color 0.2s ease;
 }
+
+/* .hero-text{
+    display: inline-flex;
+    margin-top: 20%;
+    margin-right: 5%;
+} */
+
+.hero-heading {
+  display: block;            /* Ensures it acts as a block element */
+  width: max-content;        /* Shrinks the width to fit the longest line of text */
+  margin-left: auto;         /* Automatically pushes the element to the right */
+  text-align: left; 
+  padding-right: 5%;
+  padding-top: 5%;
+  
+
+  font-family: "Darumadrop One", cursive;
+  color: #4433e0;
+  /* max-width: 600px; */
+}
+
+.line12arrange{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.line-1 {
+  font-size: clamp(1.5rem, 2.7vw, 2.25rem);
+}
+
+.line-2 {
+  font-size: clamp(0.825rem, 1.65vw, 1.35rem);
+  margin-top: 6px;
+}
+
+
+/* here's my cursor secrtion */
+* {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  border: 2px dashed #302AD7;
+  border-radius: 50%;
+
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.25s ease,
+              border 0.25s ease;
+}
+
+.custom-cursor.hovering {
+  width: 16px;
+  height: 16px;
+  background: #fed064;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+
+body {
+    background-color: #fffffc; /* Changes background to a dark gray */
+}
+
+/* carousel */
+.carousel-track-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw; 
+  /* the line above n below fix the white gap of carousel */
+  margin-right: -50vw;
+  margin-top: 25px;
+  overflow: hidden;
+  background: #302AD7;
+  padding: 24px 0;
+}
+
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+.carousel-track img {
+  height: 60px;
+  margin: 0 48px;
+  object-fit: contain;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); } /* 100% ÷ 4 sets */
+}
+
+/* .carousel-track-wrapper:hover .carousel-track {
+  animation-play-state: paused;
+} */
