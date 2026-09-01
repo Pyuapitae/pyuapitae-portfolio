@@ -10,195 +10,199 @@
   font-style: normal;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-/* this is just for ref */
-:root{
-    color: #302AD7;
-    color:#F8F5F2;
+:root {
+  color: #F8F5F2;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fffffc;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    color:#302AD7;
+  display: flex;
+  align-items: center;
+  color: #302AD7;
 }
 
-.logo{
-    padding-left: 3%;
-    padding-top: 0.5%;
-    width: 200px;
-    height: 70px;
-    /* background-color: rgb(216, 2, 2); */
-    object-fit: cover;
-
+.logo {
+  padding-left: 3%;
+  padding-top: 0.5%;
+  width: 200px;
+  height: 70px;
+  object-fit: cover;
 }
 
-.logo img{
-    max-width: 200px;  /* Prevents the image from overflowing its container */
-    height: auto;  
-    display: flex;  
+.logo img {
+  max-width: 200px;
+  height: auto;
+  display: flex;
 }
 
 .navbar {
-    display: flex;
-    gap: clamp(12px, 3vw, 50px);
-    padding-right: 4%;
-    /* padding-top: 2%; */
-    margin-left: auto;
-    font-family: "Inter", sans-serif;
-    max-width: fit-content;
+  display: flex;
+  gap: clamp(12px, 3vw, 50px);
+  padding-right: 4%;
+  margin-left: auto;
+  font-family: "Inter", sans-serif;
+  max-width: fit-content;
 }
 
-
 .navbar a {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-    font-size: var(--nav-size);
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  font-size: var(--nav-size);
 }
 
 .navbar a:hover {
-    -webkit-text-stroke: 0.5px currentColor;
+  -webkit-text-stroke: 0.5px currentColor;
 }
 
 .brush-underline {
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-
-    width: 100%;
-    height: 8px;
-
-    background-image: url("public/home/brush-stroke.png");
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: contain;
-
-    clip-path: inset(0 100% 0 0);
-
-    transition: clip-path 0.25s ease-out;
-    pointer-events: none;
-    display: block;
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 8px;
+  background-image: url("public/home/brush-stroke.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.25s ease-out;
+  pointer-events: none;
+  display: block;
 }
 
 .navbar a:hover .brush-underline {
-    clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
 }
 
-/* this is the drop down stuff */
-.nav-item{
-    position:relative;
+.nav-item {
+  position: relative;
 }
 
 .dropdown {
-    position: absolute;
-
-    top: calc(100% + 20px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px);
-
-    display: flex;
-    flex-direction: column;
-
-    width: max-content;
-    min-width: 180px;
-
-    padding: 8px 0;
-
-    /* background: #F8F5F2; */
-    background: #302AD7;
-    color: #F8F5F2;
-    border: 1px solid rgba(0,0,0,.08);
-    border-radius: 10px;
-
-    box-shadow: 0 8px 24px rgba(0,0,0,.1);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: 0.2s ease;
-
-    z-index: 1000;
+  position: absolute;
+  top: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  min-width: 180px;
+  padding: 8px 0;
+  background: #302AD7;
+  color: #F8F5F2;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s ease;
+  z-index: 1000;
 }
 
 .nav-item:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .dropdown a {
-    display: block;
-    padding: 10px 18px;
-    text-decoration: none;
-    color: inherit;
-
-    font-size: 0.95rem;
-    font-weight: 400;
-
-    white-space: nowrap;
-    transition: background-color 0.2s ease;
+  display: block;
+  padding: 10px 18px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
 }
-
-/* .hero-text{
-    display: inline-flex;
-    margin-top: 20%;
-    margin-right: 5%;
-} */
 
 .hero-heading {
-  display: block;            /* Ensures it acts as a block element */
-  width: max-content;        /* Shrinks the width to fit the longest line of text */
-  margin-left: auto;         /* Automatically pushes the element to the right */
-  text-align: left; 
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  text-align: left;
   padding-right: 5%;
   padding-top: 5%;
-  
-
   font-family: "Darumadrop One", cursive;
   color: #4433e0;
-  /* max-width: 600px; */
 }
 
-.line12arrange{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 100%;
+.line12arrange {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
 }
 
-.line-1 {
-  font-size: clamp(1.5rem, 2.7vw, 2.25rem);
+.line12arrange a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.line-2 {
-  font-size: clamp(0.825rem, 1.65vw, 1.35rem);
-  margin-top: 6px;
+/* line-1 link (wraps the whole heading) */
+.line12arrange > a {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.line12arrange > a:hover {
+  transform: translateY(-8px) rotate(-3deg);
+}
+
+.design-link {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.design-link:hover {
+  transform: translateY(-8px) rotate(-3deg);
 }
 
 
-/* here's my cursor secrtion */
-* {
-  cursor: none;
+
+/* Desktop only */
+@media (hover: hover) and (pointer: fine) {
+  html, body, * {
+    cursor: none !important;
+  }
+}
+
+/* Mobile — restore cursor */
+@media (hover: none) and (pointer: coarse) {
+  html, body, * {
+    cursor: auto !important;
+  }
 }
 
 .custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  
   width: 35px;
   height: 35px;
   background: transparent;
   border: 2px dashed #302AD7;
   border-radius: 50%;
-
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
-
   transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
               height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
               background 0.25s ease,
@@ -213,26 +217,17 @@ header {
   border: 2px solid transparent;
 }
 
-
-body {
-    background-color: #fffffc; /* Changes background to a dark gray */
-}
-
 /* carousel */
 .carousel-track-wrapper {
   width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw; 
-  /* the line above n below fix the white gap of carousel */
-  margin-right: -50vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   margin-top: 25px;
+  margin-bottom: 25px;
   overflow: hidden;
   background: #302AD7;
   padding: 24px 0;
 }
-
 
 .carousel-track {
   display: flex;
@@ -248,9 +243,77 @@ body {
 
 @keyframes scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(-25%); } /* 100% ÷ 4 sets */
+  to { transform: translateX(-25%); }
 }
 
-/* .carousel-track-wrapper:hover .carousel-track {
-  animation-play-state: paused;
-} */
+.line-1 {
+  font-size: clamp(2rem, 3.75vw, 2.75rem);
+}
+
+.line-2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.0625rem);
+  margin-top: 6px;
+  margin-left: 10%;
+}
+
+.second-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  background: #302AD7;
+  color: white;
+  padding: 80px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.second-section-text {
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  flex: 1 1 320px;
+}
+
+.line-3 {
+  font-family: "Darumadrop One", cursive;
+  font-size: clamp(2rem, 3.75vw, 2.75rem);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 20px;
+}
+
+.brush-underline-big {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80%;
+  height: 12px;
+  background-image: url("public/home/brush-stroke-white-v2.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  clip-path: inset(0 100% 0 0);
+  animation: revealBrush 0.6s ease-out 0.3s forwards;
+  pointer-events: none;
+  display: block;
+}
+
+@keyframes revealBrush {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.line-4,
+.line-5 {
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-top: 20px;
+}
