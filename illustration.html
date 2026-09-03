@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Pyuapitae">
+    <link rel="icon" type="image/png" href="public/home/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bpmf+Huninn&family=Darumadrop+One&family=Doto:wght,ROND@100..900,100&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap"
+    rel="stylesheet">
+
+  <title>pyuapitae portfolio — illustration</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- ===== SHARED NAVBAR - COPY TO ALL PAGES WHEN UPDATED ===== -->
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="public/home/logo.PNG" alt="pyuapitae logo">
+      </a>
+    </div>
+
+    <nav class="navbar">
+      <a href="illustration.html">illustration
+        <span class="brush-underline"></span>
+      </a>
+
+      <a href="#sketch">sketch
+        <span class="brush-underline"></span>
+      </a>
+
+      <a href="#graphic">graphics
+        <span class="brush-underline"></span>
+      </a>
+
+      <div class="nav-item" id="projectItem">
+        <a href="#project" id="projectToggle">
+          projects
+          <span class="caret"></span>
+          <span class="brush-underline"></span>
+        </a>
+
+        <div class="dropdown" id="projectDropdown">
+          <a href="#siat">SIAT Vtuber Appearl</a>
+          <a href="#idwtm">I Don't Want to Move - Self Publish</a>
+          <a href="#bunny-animation">Hot Summer Day - Animation</a>
+        </div>
+      </div>
+
+      <a href="#about">about
+        <span class="brush-underline"></span>
+      </a>
+    </nav>
+  </header>
+  <!-- ===== SHARED NAVBAR - COPY TO ALL PAGES WHEN UPDATED ===== -->
+
+  <h1 class="page-title">Illustration</h1>
+
+  <!--
+    HOW TO ADD A NEW IMAGE:
+    Copy one <img> line below and change the src to your new file.
+    Vertical images stay tall, horizontal images stay short/wide — no manual sizing needed.
+  -->
+  <div class="masonry-grid">
+    <img src="public/illustration/blue-period.PNG" alt="blue-period">
+    <img src="public/illustration/blanket.PNG" alt="blanket">
+    <img src="public/illustration/sad-guitar.png" alt="sad-guitar">
+
+    <img src="public/illustration/jotaro.jpg" alt="jotaro">
+    <img src="public/illustration/josuke.jpg" alt="josuke">
+
+
+    <img src="public/illustration/round-table.PNG" alt="round-table">
+    <img src="public/illustration/men-window.PNG" alt="men-window">
+    <img src="public/illustration/making-window.PNG" alt="making-window">
+    <img src="public/illustration/dancing-window.PNG" alt="dancing-window">
+    <!-- <img src="public/illustration/final-book.PNG" alt="final-book"> -->
+    <img src="public/illustration/school-girl.PNG" alt="school-girl">
+    <img src="public/illustration/pfp.png" alt="pfp">
+    <img src="public/illustration/portfolio-bag.PNG" alt="portfolio-bag">
+    <img src="public/illustration/trophy.PNG" alt="trophy">
+    <img src="public/illustration/xmas.PNG" alt="xmas">
+
+  </div>
+
+  <!-- lightbox overlay, hidden until an image is clicked -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="" id="lightbox-img">
+  </div>
+
+  <script src="script.js"></script>
+  <script src="illustration.js"></script>
+</body>
+</html>
