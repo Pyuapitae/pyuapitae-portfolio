@@ -368,7 +368,8 @@ header {
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   color: #302AD7;
   padding: 20px 40px 0;
-  margin: 6% 0 24px 0;
+  margin: 6% 0 0 0;
+  text-align: center;
 }
 
 .masonry-grid {
@@ -403,6 +404,9 @@ header {
 }
 
 /* ---------- illustration page: lightbox ---------- */
+/* ---------- illustration page: lightbox ---------- */
+/* ---------- illustration page: lightbox ---------- */
+
 .lightbox {
   position: fixed;
   inset: 0;
@@ -424,4 +428,33 @@ header {
   max-height: 90vh;
   border-radius: 4px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.lil-blurb {
+  text-align: center;
+  /* font-family: "Inter", sans-serif;   */
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: #302AD7;
+  margin: 15px 0 80px 0;
+}
+
+/* <-----THIS IS SKETCH SECTION ----> */
+/* <-----THIS IS SKETCH SECTION ----> */
+/* <-----THIS IS SKETCH SECTION ----> */
+.sketch-grid {
+  column-count: 4;
+}
+
+@media (max-width: 1200px) {
+  .sketch-grid { column-count: 3; }
+}
+
+@media (max-width: 900px) {
+  .sketch-grid { column-count: 2; }
+}
+
+@media (max-width: 500px) {
+  .sketch-grid { column-count: 1; }
 }
