@@ -466,10 +466,10 @@ header {
 /* <-----THIS IS HOT SUMMER DAY SECTION ----> */
 .video-hero {
   position: relative;
-  width: 94%;
+  /* width: 94%; */
   margin: 40px 3%;
-  height: 75dvh;
-  overflow: hidden;
+  height: 50dvh;
+  overflow: visible;
 }
 
 .video-hero video {
@@ -478,6 +478,7 @@ header {
   object-fit: cover;
   display: block;
 }
+
 
 .project-section {
   padding: 20px 3%;
@@ -590,6 +591,7 @@ header {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
+  height: auto;
   overflow: hidden;
 }
 
@@ -602,6 +604,7 @@ header {
   display: block;
   border: none;
 }
+
 
 /* ---------- scroll fade-in animation ---------- */
 .fade-in-el {
