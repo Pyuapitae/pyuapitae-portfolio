@@ -1,3 +1,6 @@
+/* =========================================================
+   FONTS
+   ========================================================= */
 .inter {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
@@ -10,12 +13,25 @@
   font-style: normal;
 }
 
+
+/* =========================================================
+   GLOBAL / RESET
+   ========================================================= */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   color: #F8F5F2;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {
@@ -26,9 +42,86 @@ html, body {
 }
 
 body {
-  background-color: #fffffc;
+  background-color: #fffefb;
+  font-family: "Darumadrop One", cursive;
+  color: #302AD7;
 }
 
+
+/* =========================================================
+   SHARED EASE-IN (used on every page, no blur)
+   Usage: add class="reveal" to anything that should ease in.
+   Add d1 / d2 / d3 / d4 for a staggered delay.
+   Don't put .reveal on elements that already have a transform;
+   put it on their parent instead.
+   ========================================================= */
+@keyframes easeIn {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* home + project pages ease in automatically */
+.hero-heading,
+.carousel-track-wrapper,
+.second-section,
+.video-hero,
+.project-section {
+  animation: easeIn 1.1s cubic-bezier(.22, .8, .3, 1) backwards;
+}
+
+.carousel-track-wrapper { animation-delay: .15s; }
+.second-section         { animation-delay: .3s; }
+.video-hero             { animation-delay: .15s; }
+.project-section:nth-of-type(2) { animation-delay: .15s; }
+.project-section:nth-of-type(3) { animation-delay: .3s; }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .page-title, .lil-blurb, .masonry-grid, .stagger > *,
+  .hero-heading, .carousel-track-wrapper, .second-section,
+  .video-hero, .project-section { animation: none; }
+}
+
+
+.reveal {
+  animation: easeIn 1.1s cubic-bezier(.22, .8, .3, 1) backwards;
+}
+.d1 { animation-delay: .15s; }
+.d2 { animation-delay: .3s; }
+.d3 { animation-delay: .45s; }
+.d4 { animation-delay: .6s; }
+
+/* existing pages ease in without touching their HTML */
+.page-title   { animation: easeIn 1.1s cubic-bezier(.22, .8, .3, 1) backwards; }
+.lil-blurb    { animation: easeIn 1.1s cubic-bezier(.22, .8, .3, 1) .15s backwards; }
+.masonry-grid { animation: easeIn 1.1s cubic-bezier(.22, .8, .3, 1) .3s backwards; }
+
+/* optional: auto-stagger the children of any section with class="stagger" */
+.stagger > * { animation: easeIn 1.1s cubic-bezier(.22, .8, .3, 1) backwards; }
+.stagger > *:nth-child(2) { animation-delay: .15s; }
+.stagger > *:nth-child(3) { animation-delay: .3s; }
+.stagger > *:nth-child(4) { animation-delay: .45s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .page-title, .lil-blurb, .masonry-grid, .stagger > * { animation: none; }
+}
+
+/* scroll-triggered fade (needs the JS that adds .fade-in-visible) */
+.fade-in-el {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   HEADER / NAV
+   ========================================================= */
 header {
   display: flex;
   align-items: center;
@@ -139,6 +232,60 @@ header {
   transition: background-color 0.2s ease;
 }
 
+
+/* =========================================================
+   CUSTOM CURSOR
+   ========================================================= */
+/* Desktop only */
+@media (hover: hover) and (pointer: fine) {
+  html, body, * {
+    cursor: none !important;
+  }
+}
+
+/* Mobile: restore cursor */
+@media (hover: none) and (pointer: coarse) {
+  html, body, * {
+    cursor: auto !important;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  border: 2px dashed #302AD7;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.25s ease,
+              border 0.25s ease;
+}
+
+/* on dark backgrounds, border turns white instead of blue */
+.custom-cursor.on-dark {
+  border-color: white;
+}
+
+/* hovering an interactive element: stays yellow regardless of background */
+.custom-cursor.hovering {
+  width: 16px;
+  height: 16px;
+  background: #fed064;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
 .hero-heading {
   display: block;
   width: max-content;
@@ -180,81 +327,15 @@ header {
   transform: translateY(-8px) rotate(-3deg);
 }
 
-
-/* Desktop only */
-@media (hover: hover) and (pointer: fine) {
-  html, body, * {
-    cursor: none !important;
-  }
+.line-1 {
+  font-size: clamp(2rem, 3.75vw, 2.75rem);
 }
 
-/* Mobile — restore cursor */
-@media (hover: none) and (pointer: coarse) {
-  html, body, * {
-    cursor: auto !important;
-  }
+.line-2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.0625rem);
+  margin-top: 6px;
+  margin-left: 10%;
 }
-/* 
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 35px;
-  height: 35px;
-  background: transparent;
-  border: 2px dashed #302AD7;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-              height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-              background 0.25s ease,
-              border 0.25s ease;
-}
-
-.custom-cursor.hovering {
-  width: 16px;
-  height: 16px;
-  background: #fed064;
-  border-radius: 50%;
-  border: 2px solid transparent;
-}
- */
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 35px;
-  height: 35px;
-  background: transparent;
-  border: 2px dashed #302AD7;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-              height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-              background 0.25s ease,
-              border 0.25s ease;
-}
-
-/* on dark backgrounds, border turns white instead of blue */
-.custom-cursor.on-dark {
-  border-color: white;
-}
-
-/* hovering an interactive element — stays yellow regardless of background */
-.custom-cursor.hovering {
-  width: 16px;
-  height: 16px;
-  background: #fed064;
-  border-radius: 50%;
-  border: 2px solid transparent;
-}
-
-
 
 /* carousel */
 .carousel-track-wrapper {
@@ -282,19 +363,10 @@ header {
 
 @keyframes scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(-25%); }
+  to   { transform: translateX(-25%); }
 }
 
-.line-1 {
-  font-size: clamp(2rem, 3.75vw, 2.75rem);
-}
-
-.line-2 {
-  font-size: clamp(1.5rem, 2.8vw, 2.0625rem);
-  margin-top: 6px;
-  margin-left: 10%;
-}
-
+/* second section */
 .second-section {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
@@ -308,8 +380,6 @@ header {
   gap: 60px;
   flex-wrap: wrap;
 }
-
-
 
 .second-section-text {
   display: flex;
@@ -333,7 +403,6 @@ header {
   transform: translateY(-6px);
 }
 
-
 .brush-underline-big {
   position: absolute;
   left: 0;
@@ -351,9 +420,7 @@ header {
 }
 
 @keyframes revealBrush {
-  to {
-    clip-path: inset(0 0 0 0);
-  }
+  to { clip-path: inset(0 0 0 0); }
 }
 
 .line-4,
@@ -365,10 +432,10 @@ header {
   margin-top: 20px;
 }
 
-/* ---------- illustration page: masonry grid ---------- */
-/* ---------- illustration page: masonry grid ---------- */
-/* ---------- illustration page: masonry grid ---------- */
-/* ---------- illustration page: masonry grid ---------- */
+
+/* =========================================================
+   ILLUSTRATION PAGE: masonry grid
+   ========================================================= */
 .page-title {
   font-family: "Darumadrop One", cursive;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
@@ -409,10 +476,16 @@ header {
   .masonry-grid { column-count: 1; }
 }
 
-/* ---------- illustration page: lightbox ---------- */
-/* ---------- illustration page: lightbox ---------- */
-/* ---------- illustration page: lightbox ---------- */
+.lil-blurb {
+  text-align: center;
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  color: #302AD7;
+  margin: 15px 0 80px 0;
+}
 
+/* lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -436,19 +509,10 @@ header {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.lil-blurb {
-  text-align: center;
-  /* font-family: "Inter", sans-serif;   */
-  font-family: "Darumadrop One", sans-serif;
-  font-weight: 100;
-  font-size: 24px;
-  color: #302AD7;
-  margin: 15px 0 80px 0;
-}
 
-/* <-----THIS IS SKETCH SECTION ----> */
-/* <-----THIS IS SKETCH SECTION ----> */
-/* <-----THIS IS SKETCH SECTION ----> */
+/* =========================================================
+   SKETCH PAGE
+   ========================================================= */
 .sketch-grid {
   column-count: 4;
 }
@@ -461,12 +525,12 @@ header {
   .sketch-grid { column-count: 2; }
 }
 
-/* <-----THIS IS HOT SUMMER DAY SECTION ----> */
-/* <-----THIS IS HOT SUMMER DAY SECTION ----> */
-/* <-----THIS IS HOT SUMMER DAY SECTION ----> */
+
+/* =========================================================
+   HOT SUMMER DAY / PROJECT PAGES
+   ========================================================= */
 .video-hero {
   position: relative;
-  /* width: 94%; */
   margin: 40px 3%;
   height: 50dvh;
   overflow: visible;
@@ -478,7 +542,6 @@ header {
   object-fit: cover;
   display: block;
 }
-
 
 .project-section {
   padding: 20px 3%;
@@ -497,29 +560,11 @@ header {
   transform: translateX(-50%);
 }
 
-/* .section-title::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-  width: 60%;
-  height: 12px;
-  background-image: url("public/home/brush-stroke.png");
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: contain;
-  clip-path: inset(0 100% 0 0);
-  animation: revealBrush 0.6s ease-out 0.3s forwards;
-  pointer-events: none;
-  display: block;
-} */
-
 .section-title.center {
   text-align: center;
 }
 
-/* concept development layout: heading + text + sticker stacked left, storyboard right */
+/* concept development: heading + text + sticker stacked left, storyboard right */
 .concept-layout {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -587,6 +632,7 @@ header {
   display: block;
 }
 
+/* video embed */
 .video-embed-wrapper {
   position: relative;
   width: 100%;
@@ -605,21 +651,61 @@ header {
   border: none;
 }
 
-
-/* ---------- scroll fade-in animation ---------- */
-.fade-in-el {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+/* YouTube click-to-play */
+.yt-facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  display: block;
+  background: #302AD7;
 }
 
-.fade-in-visible {
-  opacity: 1;
-  transform: translateY(0);
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
+.yt-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(48px, 8vw, 72px);
+  height: clamp(48px, 8vw, 72px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #fed064;
+}
 
-/* ---------- TABLET (900px and below) ---------- */
+.yt-play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent #302AD7;
+}
+
+/* image loading: placeholder color + reserved space */
+.masonry-grid img,
+.two-col-grid img,
+.three-col-grid img,
+.concept-storyboard {
+  background: #F8F5F2;
+}
+
+.masonry-grid img:not([width]) { aspect-ratio: auto 4 / 5; }
+.two-col-grid img:not([width]),
+.three-col-grid img:not([width]) { aspect-ratio: auto 4 / 3; }
+.concept-storyboard:not([width]) { aspect-ratio: auto 16 / 9; }
+
+/* tablet (900px and below) */
 @media (max-width: 900px) {
   .concept-layout {
     grid-template-columns: 1fr;
@@ -627,7 +713,7 @@ header {
   .sketch-grid { column-count: 3; }
 }
 
-/* ---------- MOBILE (500px and below) — MUST come after tablet rules ---------- */
+/* mobile (500px and below): MUST come after the tablet rules */
 @media (max-width: 500px) {
   .sketch-grid {
     column-count: 2;
@@ -680,7 +766,136 @@ header {
     border-radius: 4px;
   }
 }
-/* ---------- FOOTER ---------- */
+
+
+/* =========================================================
+   ABOUT ME
+   ========================================================= */
+.about {
+  width: 100%;
+  padding: 90px 3vw 120px;
+  overflow-x: hidden;
+}
+
+/* hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* collage scales with its column; everything inside is in % */
+.collage {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1 / 1.05;
+}
+
+.photo {
+  position: absolute;
+  object-fit: cover;
+  height: auto;
+}
+.photo-1 { width: 44%; aspect-ratio: 265 / 328; top: 0;   left: 2%;  transform: rotate(-9deg); }
+.photo-2 { width: 45%; aspect-ratio: 270 / 345; top: 40%; left: 25%; transform: rotate(10deg); }
+
+.sticker { position: absolute; height: auto; }
+.bear    { width: 16%; top: 5%;  left: 55%; }
+.turtle  { width: 25%; top: 64%; left: -5%; }
+
+.kuchipatchi {
+  position: absolute;
+  width: 20%;
+  top: 0;
+  left: 175%;
+  height: auto;
+}
+
+/* text sits higher, near the top of the collage */
+.hero-text {
+  align-self: start;
+  padding-top: clamp(40px, 9vw, 140px);
+}
+
+.hero-text h1 {
+  font-family: "Darumadrop One", cursive;
+  color: #302AD7;
+  font-weight: 400;
+  font-size: clamp(30px, 4.3vw, 52px);
+  line-height: 1.5;
+}
+
+.hero-text h1 span {
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.hero-text p {
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 500;
+  margin-top: clamp(20px, 3vw, 40px);
+}
+
+/* tablet / phone */
+@media (max-width: 800px) {
+  .about { padding: 60px 5vw 80px; }
+
+  .hero { grid-template-columns: 1fr; gap: 30px; }
+
+  .collage { max-width: 440px; margin: 0 auto; }
+
+  .hero-text { padding-top: 0; text-align: center; }
+
+  /* kuchipatchi tucks into the corner of the collage instead of off-screen */
+  .kuchipatchi { left: auto; right: 0; top: -4%; width: 16%; }
+}
+
+/* ---------- bread divider ---------- */
+.divider {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: clamp(12px, 3.5vw, 60px);
+  padding: clamp(40px, 8vh, 100px) 3vw;
+}
+
+/* wrapper stays still; it is the hover target, with extra room above for the jump */
+.bread {
+  display: block;
+  padding-top: 30px;
+}
+
+.divider-img {
+  display: block;
+  width: clamp(44px, 6.5vw, 90px);
+  height: auto;
+
+  /* coming DOWN: smooth and slightly quicker than before */
+  transition: transform .75s cubic-bezier(.33, 0, .2, 1);
+  will-change: transform;
+}
+
+.bread:hover .divider-img {
+  transform: translateY(-24px);
+
+  /* going UP: faster, with a much softer settle */
+  transition: transform .45s cubic-bezier(.25, 1.15, .4, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .divider-img,
+  .bread:hover .divider-img { transition: none; transform: none; }
+}
+
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .footer {
   width: 100%;
   font-family: "Inter", sans-serif;
@@ -832,65 +1047,4 @@ header {
   .footer-nav li + li::before {
     display: none;
   }
-}
-
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* ---------- IMAGE LOADING ---------- */
-/* placeholder color while images load */
-.masonry-grid img,
-.two-col-grid img,
-.three-col-grid img,
-.concept-storyboard {
-  background: #F8F5F2;
-}
-
-/* if a tag has no width/height, reserve space so lazy images don't all load at once */
-.masonry-grid img:not([width]) { aspect-ratio: auto 4 / 5; }
-.two-col-grid img:not([width]),
-.three-col-grid img:not([width]) { aspect-ratio: auto 4 / 3; }
-.concept-storyboard:not([width]) { aspect-ratio: auto 16 / 9; }
-
-/* ---------- YOUTUBE CLICK-TO-PLAY ---------- */
-.yt-facade {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  display: block;
-  background: #302AD7;
-}
-
-.yt-facade img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.yt-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: clamp(48px, 8vw, 72px);
-  height: clamp(48px, 8vw, 72px);
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: #fed064;
-}
-
-.yt-play::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 54%;
-  transform: translate(-50%, -50%);
-  border-style: solid;
-  border-width: 11px 0 11px 18px;
-  border-color: transparent transparent transparent #302AD7;
 }
