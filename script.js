@@ -2,7 +2,7 @@ const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').m
 
 if (!isTouchDevice) {
   const cursor = document.getElementById('cursor');
-  const darkSections = document.querySelectorAll('.carousel-track-wrapper, .second-section');
+  const darkSections = document.querySelectorAll('.carousel-track-wrapper, .second-section, .footer-bottom');
 
   const hoverSound = new Audio('public/sound/hover.mp3');
   hoverSound.volume = 0.15;
@@ -42,10 +42,6 @@ if (!isTouchDevice) {
   }
 
   // Sound-trigger detection — same as above, but EXCLUDES .masonry-grid images.
-  // Keeps hover/click sound reserved for nav, buttons, dropdowns, etc.,
-  // avoiding sound spam when scanning through image galleries.
-  // NOTE: any future masonry grids (sketch, graphics, projects, etc.) using
-  // the .masonry-grid class are automatically covered by this exclusion too.
   function shouldPlaySound(el) {
     if (!el) return false;
     if (el.closest('.masonry-grid')) return false;
@@ -97,34 +93,47 @@ if (!isTouchDevice) {
       playHoverSound();
     }
   });
-
-  const grid = document.querySelector('.masonry-grid');
-  if (grid) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    grid.addEventListener('click', (e) => {
-      if (e.target.tagName === 'IMG') {
-        lightboxImg.src = e.target.src;
-        lightboxImg.alt = e.target.alt;
-        lightbox.classList.add('active');
-      }
-    });
-
-    lightbox.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-      lightboxImg.src = '';
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        lightbox.classList.remove('active');
-        lightboxImg.src = '';
-      }
-    });
-  }
 }
 
+// ---------- LIGHTBOX (works on all devices, all grids) ----------
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+if (lightbox && lightboxImg) {
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+  };
+
+  document.querySelectorAll('.masonry-grid').forEach(grid => {
+    grid.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'IMG') return;
+      // grid shows the 800px version; lightbox loads the 1600px one
+      lightboxImg.src = e.target.dataset.full || e.target.src.replace('-800.webp', '-1600.webp');
+      lightboxImg.alt = e.target.alt;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+}
+
+// ---------- YOUTUBE: load the real player only when clicked ----------
+document.querySelectorAll('.yt-facade').forEach(facade => {
+  facade.addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${facade.dataset.id}?autoplay=1&rel=0`;
+    iframe.title = facade.dataset.title || 'Video';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    facade.replaceWith(iframe);
+  });
+});
+
+// ---------- SCROLL FADE-IN ----------
 const fadeEls = document.querySelectorAll('.two-col-grid img, .three-col-grid img, .concept-storyboard, .concept-thumbnail, .video-hero, .video-embed-wrapper');
 
 fadeEls.forEach(el => el.classList.add('fade-in-el'));
